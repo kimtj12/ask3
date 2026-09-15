@@ -155,7 +155,7 @@ pricing-strategy/
 export ASK3_OPUS_MODEL=claude-opus-5
 export ASK3_FABLE_MODEL=claude-fable-5-1
 export ASK3_GPT_MODEL=gpt-6-astra
-export ASK3_JUDGE_MODEL=claude-opus-5    # 비교표·최종본을 쓰는 모델
+export ASK3_JUDGE_MODEL=claude-fable-5-1  # 비교표·최종본을 쓰는 모델
 export ASK3_EFFORT=high                 # 네 호출 모두의 추론 강도
 ```
 

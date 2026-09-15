@@ -5,7 +5,7 @@ set -euo pipefail
 OPUS_MODEL="${ASK3_OPUS_MODEL:-claude-opus-5}"
 FABLE_MODEL="${ASK3_FABLE_MODEL:-claude-fable-5-1}"
 GPT_MODEL="${ASK3_GPT_MODEL:-gpt-6-astra}"
-JUDGE_MODEL="${ASK3_JUDGE_MODEL:-claude-opus-5}"
+JUDGE_MODEL="${ASK3_JUDGE_MODEL:-claude-fable-5-1}"
 EFFORT="${ASK3_EFFORT:-high}"
 
 # 심볼릭 링크를 따라 실제 스크립트 위치를 찾는다
