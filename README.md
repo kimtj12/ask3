@@ -19,9 +19,9 @@ Claude Code 스킬 + CLI. 약 1분.
 ```
 PROMPT.md  (질문 하나)
     │
-    ├── claude -p --model claude-opus-5   ─┐
-    ├── claude -p --model claude-fable-5  ─┤  병렬
-    └── codex exec -m gpt-5.6-sol         ─┘
+    ├── claude -p --model claude-opus-5 --effort high     ─┐
+    ├── claude -p --model claude-fable-5-1 --effort high  ─┤  병렬
+    └── codex exec -m gpt-6-astra (effort high)           ─┘
                     ↓
          _runs/opus5.md, fable5.md, gpt.md      ← 열지 않는다
                     ↓
@@ -153,9 +153,10 @@ pricing-strategy/
 
 ```bash
 export ASK3_OPUS_MODEL=claude-opus-5
-export ASK3_FABLE_MODEL=claude-fable-5
-export ASK3_GPT_MODEL=gpt-5.6-sol
+export ASK3_FABLE_MODEL=claude-fable-5-1
+export ASK3_GPT_MODEL=gpt-6-astra
 export ASK3_JUDGE_MODEL=claude-opus-5    # 비교표·최종본을 쓰는 모델
+export ASK3_EFFORT=high                 # 네 호출 모두의 추론 강도
 ```
 
 세 모델 모두에 공통으로 붙는 꼬리말(한국어·마크다운·서론 없이 등)은 `ask3.sh` 의 `SUFFIX` 에 있다. 답변 형식이 제각각이면 비교가 안 되기 때문에 강제한다.

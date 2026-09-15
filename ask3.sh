@@ -3,9 +3,10 @@
 set -euo pipefail
 
 OPUS_MODEL="${ASK3_OPUS_MODEL:-claude-opus-5}"
-FABLE_MODEL="${ASK3_FABLE_MODEL:-claude-fable-5}"
-GPT_MODEL="${ASK3_GPT_MODEL:-gpt-5.6-sol}"
+FABLE_MODEL="${ASK3_FABLE_MODEL:-claude-fable-5-1}"
+GPT_MODEL="${ASK3_GPT_MODEL:-gpt-6-astra}"
 JUDGE_MODEL="${ASK3_JUDGE_MODEL:-claude-opus-5}"
+EFFORT="${ASK3_EFFORT:-high}"
 
 # 심볼릭 링크를 따라 실제 스크립트 위치를 찾는다
 _src="${BASH_SOURCE[0]}"
@@ -55,7 +56,7 @@ TPL
 # ---------- run ----------
 run_claude() {
   local model="$1" out="$2" prompt="$3"
-  if claude -p --model "$model" "$prompt" > "$out" 2> "$out.log"; then
+  if claude -p --model "$model" --effort "$EFFORT" "$prompt" > "$out" 2> "$out.log"; then
     [[ -s "$out" ]] || { echo "(빈 응답)" > "$out"; return 1; }
     return 0
   fi
@@ -66,7 +67,7 @@ run_claude() {
 run_codex() {
   local model="$1" out="$2" prompt="$3"
   if codex exec --skip-git-repo-check -s read-only --color never \
-       -m "$model" -o "$out" "$prompt" > "$out.log" 2>&1; then
+       -m "$model" -c model_reasoning_effort="$EFFORT" -o "$out" "$prompt" > "$out.log" 2>&1; then
     [[ -s "$out" ]] || { echo "(빈 응답)" > "$out"; return 1; }
     return 0
   fi
@@ -101,7 +102,7 @@ cmd_run() {
   say ""
   say "${c_bld}비교표 생성${c_off} ${c_dim}($JUDGE_MODEL)${c_off}"
   local judge; judge="$(build_compare_prompt)"
-  claude -p --model "$JUDGE_MODEL" "$judge" > COMPARE.md 2> _runs/compare.log \
+  claude -p --model "$JUDGE_MODEL" --effort "$EFFORT" "$judge" > COMPARE.md 2> _runs/compare.log \
     || die "비교 생성 실패. _runs/compare.log 확인"
   [[ -s COMPARE.md ]] || die "COMPARE.md 가 비었습니다. _runs/compare.log 확인"
 
@@ -165,7 +166,7 @@ $(cat _runs/fable5.md 2>/dev/null || echo '(없음)')
 
 $(cat _runs/gpt.md 2>/dev/null || echo '(없음)')"
 
-  claude -p --model "$JUDGE_MODEL" "$p" > FINAL.md 2> _runs/final.log \
+  claude -p --model "$JUDGE_MODEL" --effort "$EFFORT" "$p" > FINAL.md 2> _runs/final.log \
     || die "최종본 생성 실패. _runs/final.log 확인"
   [[ -s FINAL.md ]] || die "FINAL.md 가 비었습니다. _runs/final.log 확인"
   say "  ${c_grn}✓${c_off} FINAL.md"
@@ -189,6 +190,7 @@ ask3 — 같은 질문을 세 모델에 던지고 비교표 한 장으로 받는
   fable5  $FABLE_MODEL     \$ASK3_FABLE_MODEL
   gpt     $GPT_MODEL       \$ASK3_GPT_MODEL
   심판    $JUDGE_MODEL     \$ASK3_JUDGE_MODEL
+  effort  $EFFORT            \$ASK3_EFFORT  (네 호출 모두 적용)
 
 심판 프롬프트를 고치려면: $SKILL_DIR/compare-prompt.md
 HLP

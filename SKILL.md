@@ -39,3 +39,4 @@ description: 같은 질문을 Opus5 / Fable5 / GPT 세 모델에 병렬로 던�
 - 심판 프롬프트: `~/.claude/skills/ask3/compare-prompt.md`
 - 최종본 프롬프트: `~/.claude/skills/ask3/final-prompt.md`
 - 모델 교체: `ASK3_OPUS_MODEL` / `ASK3_FABLE_MODEL` / `ASK3_GPT_MODEL` / `ASK3_JUDGE_MODEL`
+- effort: `ASK3_EFFORT` (기본 high)
