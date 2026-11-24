@@ -19,9 +19,9 @@ Claude Code 스킬 + CLI. 약 1분.
 ```
 PROMPT.md  (질문 하나)
     │
-    ├── claude -p --model claude-opus-5 --effort high     ─┐
-    ├── claude -p --model claude-fable-5-1 --effort high  ─┤  병렬
-    └── codex exec -m gpt-6-astra (effort high)           ─┘
+    ├── claude -p --model claude-opus-5-5 --effort high   ─┐
+    ├── claude -p --model claude-fable-5-2 --effort high  ─┤  병렬
+    └── codex exec -m gpt-6.2-astra (effort high)         ─┘
                     ↓
          _runs/opus5.md, fable5.md, gpt.md      ← 열지 않는다
                     ↓
@@ -152,10 +152,10 @@ pricing-strategy/
 환경변수로 바꾼다. 다른 조합을 쓰고 싶으면 여기만 건드리면 된다.
 
 ```bash
-export ASK3_OPUS_MODEL=claude-opus-5
-export ASK3_FABLE_MODEL=claude-fable-5-1
-export ASK3_GPT_MODEL=gpt-6-astra
-export ASK3_JUDGE_MODEL=claude-fable-5-1  # 비교표·최종본을 쓰는 모델
+export ASK3_OPUS_MODEL=claude-opus-5-5
+export ASK3_FABLE_MODEL=claude-fable-5-2
+export ASK3_GPT_MODEL=gpt-6.2-astra
+export ASK3_JUDGE_MODEL=claude-fable-5-2  # 비교표·최종본을 쓰는 모델
 export ASK3_EFFORT=high                 # 네 호출 모두의 추론 강도
 ```
 

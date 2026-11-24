@@ -2,10 +2,10 @@
 # ask3 — 같은 질문을 Opus5 / Fable5 / GPT 에 병렬로 던지고, 비교표 한 장으로 받는다.
 set -euo pipefail
 
-OPUS_MODEL="${ASK3_OPUS_MODEL:-claude-opus-5}"
-FABLE_MODEL="${ASK3_FABLE_MODEL:-claude-fable-5-1}"
-GPT_MODEL="${ASK3_GPT_MODEL:-gpt-6-astra}"
-JUDGE_MODEL="${ASK3_JUDGE_MODEL:-claude-fable-5-1}"
+OPUS_MODEL="${ASK3_OPUS_MODEL:-claude-opus-5-5}"
+FABLE_MODEL="${ASK3_FABLE_MODEL:-claude-fable-5-2}"
+GPT_MODEL="${ASK3_GPT_MODEL:-gpt-6.2-astra}"
+JUDGE_MODEL="${ASK3_JUDGE_MODEL:-claude-fable-5-2}"
 EFFORT="${ASK3_EFFORT:-high}"
 
 # 심볼릭 링크를 따라 실제 스크립트 위치를 찾는다
